@@ -16,7 +16,7 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', Auth::id())->first();
 
         if (!$profile) {
-            return response()->json(['message' => 'No profile found'], 200); // رجع 200 بدل 404
+            return response()->json(['message' => 'No profile found'], 200); 
         }
 
         return response()->json($profile);
@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $validatedData = $request->validated();
         $validatedData['user_id'] = $user_id;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('photo', 'public'); //string
+            $path = $request->file('image')->store('photo', 'public'); 
             $validatedData['image'] = $path;
         }
         if (Profile::where('user_id', $user_id)->exists()) {
